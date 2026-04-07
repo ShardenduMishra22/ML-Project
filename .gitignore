@@ -1,0 +1,22 @@
+# General
+.DS_Store
+*.log
+.env.local
+
+# Go
+backend-go/bin/
+backend-go/.cache/
+backend-go/coverage.out
+
+# Python
+ml-service-python/.venv/
+ml-service-python/__pycache__/
+ml-service-python/.pytest_cache/
+ml-service-python/.mypy_cache/
+
+# Node
+frontend-react/node_modules/
+frontend-react/dist/
+
+# Docker
+postgres/data/

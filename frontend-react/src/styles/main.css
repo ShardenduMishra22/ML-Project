@@ -1,0 +1,263 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg-1: #f5f2ea;
+  --bg-2: #efe6d4;
+  --ink: #1f221f;
+  --muted: #5f635a;
+  --card: rgba(255, 252, 246, 0.85);
+  --stroke: rgba(94, 76, 48, 0.24);
+  --accent: #7c5d34;
+  --good: #2e7d4f;
+  --mid: #bf7b2a;
+  --bad: #c13b1f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 700px at -15% -20%, #fff7de 0%, transparent 65%),
+    radial-gradient(900px 500px at 115% 20%, #dbc39c 0%, transparent 60%),
+    linear-gradient(160deg, var(--bg-1), var(--bg-2));
+  font-family: "Space Grotesk", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: "Fraunces", serif;
+  letter-spacing: 0.02em;
+}
+
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.hero {
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1.1;
+}
+
+.hero p {
+  margin: 10px 0 0;
+  max-width: 760px;
+  color: var(--muted);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.layout-main,
+.layout-secondary {
+  display: grid;
+  gap: 18px;
+  margin-top: 14px;
+}
+
+.layout-main {
+  grid-template-columns: 1.15fr 1fr;
+}
+
+.layout-secondary {
+  grid-template-columns: 1.35fr 0.9fr;
+}
+
+.card {
+  border: 1px solid var(--stroke);
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 10px 24px rgba(44, 34, 16, 0.08);
+}
+
+.card h2 {
+  margin-bottom: 12px;
+}
+
+.input-form .grid {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+input,
+select,
+button {
+  font: inherit;
+}
+
+input,
+select {
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 11px 16px;
+  background: linear-gradient(95deg, #6f5732, #9a723c);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.muted {
+  color: var(--muted);
+  margin-top: 0;
+}
+
+.map-card .map {
+  width: 100%;
+  height: 500px;
+  border-radius: 14px;
+}
+
+.summary-card .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.summary-card .stats-grid div {
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.explanation-list {
+  padding-left: 18px;
+  margin-top: 6px;
+}
+
+.risk-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.risk-low {
+  background: rgba(46, 125, 79, 0.16);
+  color: var(--good);
+}
+
+.risk-medium {
+  background: rgba(191, 123, 42, 0.18);
+  color: var(--mid);
+}
+
+.risk-high {
+  background: rgba(193, 59, 31, 0.18);
+  color: var(--bad);
+}
+
+.confidence {
+  background: rgba(42, 54, 64, 0.12);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.raw-card pre {
+  max-height: 500px;
+  overflow: auto;
+  background: #1f221f;
+  color: #eef5ec;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 0.8rem;
+}
+
+.error-banner {
+  margin: 10px 0;
+  border: 1px solid rgba(170, 32, 32, 0.28);
+  border-radius: 10px;
+  background: rgba(247, 220, 215, 0.8);
+  color: #9a1e12;
+  padding: 10px 12px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 1080px) {
+  .layout-main,
+  .layout-secondary {
+    grid-template-columns: 1fr;
+  }
+
+  .map-card .map {
+    height: 420px;
+  }
+}
+
+@media (max-width: 700px) {
+  .grid.two,
+  .grid.three {
+    grid-template-columns: 1fr;
+  }
+
+  .page {
+    padding: 14px;
+  }
+
+  .map-card .map {
+    height: 320px;
+  }
+}
