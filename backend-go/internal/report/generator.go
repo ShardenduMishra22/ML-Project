@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/jung-kurt/gofpdf"
@@ -20,6 +21,7 @@ func BuildReport(
 	validationResult domain.ValidationSummary,
 	riskClass string,
 	confidence float64,
+	citizenSummary domain.CitizenSummary,
 	explanation []string,
 	apiTrace []domain.APICallTrace,
 	latency domain.LatencyMetrics,
@@ -37,6 +39,7 @@ func BuildReport(
 		MLPrediction:      prediction,
 		RiskClass:         riskClass,
 		Confidence:        confidence,
+		CitizenSummary:    citizenSummary,
 		Explanation:       explanation,
 		ValidationSummary: validationResult,
 		Evidence:          mapOrEmpty(preprocessed["evidence"]),
@@ -58,6 +61,33 @@ func GeneratePDF(report domain.Report) ([]byte, error) {
 	pdf.CellFormat(0, 8, fmt.Sprintf("Risk Class: %s", report.RiskClass), "", 1, "L", false, 0, "")
 	pdf.CellFormat(0, 8, fmt.Sprintf("Confidence: %.2f", report.Confidence), "", 1, "L", false, 0, "")
 	pdf.Ln(2)
+
+	if strings.TrimSpace(report.CitizenSummary.Overview) != "" || len(report.CitizenSummary.KeyPoints) > 0 || len(report.CitizenSummary.NextSteps) > 0 {
+		pdf.SetFont("Arial", "B", 12)
+		pdf.CellFormat(0, 8, "Simple Explanation (Non-Technical)", "", 1, "L", false, 0, "")
+		pdf.SetFont("Arial", "", 10)
+		if strings.TrimSpace(report.CitizenSummary.Overview) != "" {
+			pdf.MultiCell(0, 6, report.CitizenSummary.Overview, "", "L", false)
+		}
+		for _, point := range report.CitizenSummary.KeyPoints {
+			pdf.MultiCell(0, 6, "- "+point, "", "L", false)
+		}
+		if len(report.CitizenSummary.NextSteps) > 0 {
+			pdf.Ln(1)
+			pdf.SetFont("Arial", "B", 11)
+			pdf.CellFormat(0, 7, "Suggested Next Steps", "", 1, "L", false, 0, "")
+			pdf.SetFont("Arial", "", 10)
+			for _, step := range report.CitizenSummary.NextSteps {
+				pdf.MultiCell(0, 6, "- "+step, "", "L", false)
+			}
+		}
+		if strings.TrimSpace(report.CitizenSummary.Disclaimer) != "" {
+			pdf.Ln(1)
+			pdf.SetFont("Arial", "I", 9)
+			pdf.MultiCell(0, 5, report.CitizenSummary.Disclaimer, "", "L", false)
+		}
+		pdf.Ln(1)
+	}
 
 	pdf.SetFont("Arial", "B", 12)
 	pdf.CellFormat(0, 8, "Explanation", "", 1, "L", false, 0, "")

@@ -18,6 +18,7 @@ import (
 	"landrisk/backend-go/internal/cache"
 	"landrisk/backend-go/internal/config"
 	"landrisk/backend-go/internal/db"
+	"landrisk/backend-go/internal/explain"
 	"landrisk/backend-go/internal/handlers"
 	"landrisk/backend-go/internal/kgis"
 	"landrisk/backend-go/internal/ml"
@@ -47,7 +48,8 @@ func main() {
 	repo := db.NewRepository(pool)
 	kgisClient := kgis.NewClient(cfg.KGISBaseURL, cfg.KGISTimeout, cfg.KGISRetryCount, cfg.KGISCacheTTL, redisCache, log.Logger)
 	mlClient := ml.NewClient(cfg.MLServiceURL, cfg.MLTimeout, cfg.MLCacheTTL, redisCache, log.Logger)
-	analyzer := service.NewAnalyzer(cfg, repo, redisCache, kgisClient, mlClient, log.Logger)
+	summaryClient := explain.NewClient(cfg.OpenRouterBaseURL, cfg.OpenRouterAPIKey, cfg.OpenRouterModel, cfg.OpenRouterTimeout, log.Logger)
+	analyzer := service.NewAnalyzer(cfg, repo, redisCache, kgisClient, mlClient, summaryClient, log.Logger)
 	h := handlers.New(analyzer, log.Logger)
 
 	app := fiber.New(fiber.Config{

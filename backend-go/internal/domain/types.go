@@ -76,6 +76,14 @@ type LatencyMetrics struct {
 	StepLatencyMS   map[string]int64 `json:"stepLatencyMs"`
 }
 
+type CitizenSummary struct {
+	Overview   string   `json:"overview"`
+	KeyPoints  []string `json:"keyPoints"`
+	NextSteps  []string `json:"nextSteps"`
+	Disclaimer string   `json:"disclaimer"`
+	Source     string   `json:"source"`
+}
+
 type Report struct {
 	ID                string            `json:"id"`
 	CreatedAt         time.Time         `json:"createdAt"`
@@ -89,6 +97,7 @@ type Report struct {
 	MLPrediction      MLPrediction      `json:"mlPrediction"`
 	RiskClass         string            `json:"riskClass"`
 	Confidence        float64           `json:"confidence"`
+	CitizenSummary    CitizenSummary    `json:"citizenSummary"`
 	Explanation       []string          `json:"explanation"`
 	ValidationSummary ValidationSummary `json:"validationSummary"`
 	Evidence          map[string]any    `json:"evidence"`

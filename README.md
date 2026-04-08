@@ -51,6 +51,10 @@ make integration-test
 - `GET /trace/:id`
 - `GET /health`
 
+`POST /analyze` now includes a non-technical explanation at `report.citizenSummary`.
+
+`GET /report/:id` (JSON) and `GET /report/:id?format=pdf` include the same non-technical explanation.
+
 ## ML APIs
 
 - `POST /predict`
@@ -69,3 +73,11 @@ make integration-test
 - Satellite features are fetched from Sentinel-2/Landsat STAC assets.
 - Validation layer applies cross-source confidence and deterministic risk override for high water overlap.
 - Reports are persisted to PostgreSQL and retrievable as JSON/PDF.
+- If `OPENROUTER_API_KEY` is set, the backend generates plain-language summaries for non-technical users. If unavailable, it falls back to deterministic wording.
+
+## Optional OpenRouter settings
+
+- `OPENROUTER_API_KEY`
+- `OPENROUTER_MODEL` (default: `openai/gpt-oss-120b:free`)
+- `OPENROUTER_BASE_URL` (default: `https://openrouter.ai/api/v1`)
+- `OPENROUTER_TIMEOUT_SECONDS` (default: `8`)

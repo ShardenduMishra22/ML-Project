@@ -69,7 +69,37 @@ export default function SummaryPanel({ report, onExportJson, onExportPdf, export
         </div>
       </div>
 
-      <h3>Explanation</h3>
+      {report.citizenSummary?.overview && (
+        <>
+          <h3>Simple Explanation</h3>
+          <p className="citizen-overview">{report.citizenSummary.overview}</p>
+
+          {(report.citizenSummary.keyPoints || []).length > 0 && (
+            <ul className="explanation-list citizen-points">
+              {(report.citizenSummary.keyPoints || []).map((point, idx) => (
+                <li key={`point-${idx}`}>{point}</li>
+              ))}
+            </ul>
+          )}
+
+          {(report.citizenSummary.nextSteps || []).length > 0 && (
+            <>
+              <h3>Suggested Next Steps</h3>
+              <ul className="explanation-list citizen-next-steps">
+                {(report.citizenSummary.nextSteps || []).map((step, idx) => (
+                  <li key={`step-${idx}`}>{step}</li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {report.citizenSummary.disclaimer && (
+            <p className="citizen-disclaimer">{report.citizenSummary.disclaimer}</p>
+          )}
+        </>
+      )}
+
+      <h3>Technical Explanation</h3>
       <ul className="explanation-list">
         {(report.explanation || []).map((line, idx) => (
           <li key={idx}>{line}</li>

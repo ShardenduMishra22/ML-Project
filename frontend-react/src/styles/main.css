@@ -362,6 +362,27 @@ button:disabled {
   gap: 6px;
 }
 
+.citizen-overview {
+  margin: 6px 0 0;
+  color: #303a31;
+  line-height: 1.5;
+}
+
+.citizen-points,
+.citizen-next-steps {
+  margin-top: 8px;
+}
+
+.citizen-disclaimer {
+  margin: 10px 0 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(108, 87, 54, 0.24);
+  background: rgba(255, 255, 255, 0.66);
+  color: #4e574e;
+  font-size: 0.82rem;
+}
+
 .risk-badges {
   display: flex;
   gap: 8px;
